@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# crystalFetch
-=======
 # Crystal Fetch
 ## The fastest fetch around!
 ### It's written in GOGOGO!!
@@ -15,4 +12,3 @@ ToDo()
 1. Determine what info that will be fetched
 2. Get images/ascii art of some clever shit
 3. User choices?
->>>>>>> ddaad9a (Initial local commit)
