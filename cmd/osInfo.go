@@ -26,12 +26,12 @@ var osInfoCmd = &cobra.Command{
 		fmt.Println("osInfo called")
 		host, hostErr := os.Hostname()
 		if hostErr != nil {
-			hostErr = errors.New("Error retrieving hostname. Exiting 1.")
+			hostErr = errors.New("Error retrieving hostname. Exit 1.")
 			os.Exit(1)
 		}
 		kernel, err := exec.Command("uname", "-or").Output()
 		if err != nil {
-			err = errors.New("Error getting kernel info. Exiting 2.")
+			err = errors.New("Error getting kernel info. Exit 2.")
 			os.Exit(2)
 		}
 		info.Hostname = host
