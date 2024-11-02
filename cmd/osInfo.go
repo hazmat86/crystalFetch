@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/spf13/cobra"
+	"log"
 	"os"
 	"os/exec"
 )
@@ -27,12 +28,12 @@ var osInfoCmd = &cobra.Command{
 		host, hostErr := os.Hostname()
 		if hostErr != nil {
 			hostErr = errors.New("Error retrieving hostname. Exit 1.")
-			os.Exit(1)
+			log.Fatal(hostErr)
 		}
 		kernel, err := exec.Command("uname", "-or").Output()
 		if err != nil {
 			err = errors.New("Error getting kernel info. Exit 2.")
-			os.Exit(2)
+			log.Fatal(err)
 		}
 		info.Hostname = host
 		info.OS = string(kernel)
