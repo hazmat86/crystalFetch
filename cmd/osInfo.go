@@ -15,6 +15,7 @@ import (
 type OSInfo struct {
 	OS       string
 	Hostname string
+	User     string
 }
 
 // osInfoCmd represents the osInfo command
@@ -27,16 +28,22 @@ var osInfoCmd = &cobra.Command{
 		fmt.Println("osInfo called")
 		host, hostErr := os.Hostname()
 		if hostErr != nil {
-			hostErr = errors.New("Error retrieving hostname. Exit 1.")
+			hostErr = errors.New("Error retrieving hostname.")
 			log.Fatal(hostErr)
 		}
-		kernel, err := exec.Command("uname", "-or").Output()
-		if err != nil {
-			err = errors.New("Error getting kernel info. Exit 2.")
-			log.Fatal(err)
+		kernel, errUname := exec.Command("uname", "-or").Output()
+		if errUname != nil {
+			errUname = errors.New("Error getting kernel info.")
+			log.Fatal(errUname)
+		}
+		user, errWho := exec.Command("whoami").Output()
+		if errWho != nil {
+			errWho = errors.New("Error getting user info.")
+			log.Fatal(errWho)
 		}
 		info.Hostname = host
 		info.OS = string(kernel)
+		info.User = string(user)
 		fmt.Println(info)
 	},
 }
